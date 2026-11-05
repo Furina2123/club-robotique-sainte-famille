@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Robotique de Sainte Famille - Institution Sainte Famille Mahamasina</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#080B11',
+                        darkCard: '#111622',
+                        darkBorder: '#1E2638',
+                        midnightBlue: '#0F172A',
+                        deepNavy: '#1E1B4B',
+                        accentBlue: '#2563EB',
+                        lightGray: '#94A3B8',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #080B11;
+            color: #F8FAFC;
+        }
+        .circuit-bg {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .glow-subtle {
+            box-shadow: 0 0 35px rgba(15, 23, 42, 0.8), 0 0 15px rgba(255, 255, 255, 0.03);
+        }
+        .card-dark {
+            background: #111622;
+            border: 1px solid #1E2638;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-dark:hover {
+            border-color: #334155;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+        }
+        .tab-active {
+            background-color: #FFFFFF;
+            color: #080B11;
+        }
+        .tab-inactive {
+            background-color: #111622;
+            color: #94A3B8;
+            border: 1px solid #1E2638;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black circuit-bg">
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#080B11]/90 backdrop-blur-md border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo & Title -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-white font-black text-xl shadow-lg group-hover:border-slate-500 transition-colors">
+                    <i class="fa-solid fa-microchip text-slate-200"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-heading font-extrabold text-sm sm:text-base tracking-wider text-white">CLUB ROBOTIQUE</span>
+                    <span class="text-[11px] text-slate-400 font-semibold tracking-widest uppercase -mt-0.5">Sainte Famille Mahamasina</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links (Desktop) -->
+            <nav class="hidden lg:flex items-center gap-7">
+                <a href="#hero" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Accueil</a>
+                <a href="#apropos" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Le Club</a>
+                <a href="#public" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Public Cible</a>
+                <a href="#tarifs" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Tarifs & Matériel</a>
+                <a href="#programme" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Programme</a>
+                <a href="#parents" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Espace Parents</a>
+                <a href="#contact" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Contact</a>
+            </nav>
+
+            <!-- CTA Button & Mobile Toggle -->
+            <div class="flex items-center gap-4">
+                <a href="#inscription" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black font-bold text-sm hover:bg-slate-200 transition-all shadow-md">
+                    <i class="fa-solid fa-rocket text-xs"></i> Rejoindre
+                </a>
+                <button id="mobileMenuBtn" class="lg:hidden text-slate-300 hover:text-white p-2 text-xl focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-[#111622] border-b border-slate-800 px-6 py-4 flex flex-col gap-4">
+            <a href="#hero" class="text-slate-300 hover:text-white py-1">Accueil</a>
+            <a href="#apropos" class="text-slate-300 hover:text-white py-1">Le Club</a>
+            <a href="#public" class="text-slate-300 hover:text-white py-1">Public Cible & Conditions</a>
+            <a href="#tarifs" class="text-slate-300 hover:text-white py-1">Tarifs & Matériel</a>
+            <a href="#programme" class="text-slate-300 hover:text-white py-1">Programme (12 Projets)</a>
+            <a href="#parents" class="text-slate-300 hover:text-white py-1">Section Parents</a>
+            <a href="#contact" class="text-slate-300 hover:text-white py-1">Contact</a>
+            <a href="#inscription" class="inline-block text-center py-2.5 rounded-full bg-white text-black font-bold mt-2">Rejoindre le Club</a>
+        </div>
+    </header>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section id="hero" class="relative pt-32 pb-24 md:pt-44 md:pb-36 overflow-hidden flex items-center min-h-[90vh]">
+        <!-- Subtle Background Accent Shapes -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-slate-900/60 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Content -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-700 text-slate-300 text-xs sm:text-sm font-semibold mb-6">
+                        <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                        Institution Sainte Famille Mahamasina
+                    </div>
+                    
+                    <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-4 text-white">
+                        Club Robotique de <br class="hidden sm:inline">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">Sainte Famille</span>
+                    </h1>
+
+                    <!-- Humorous / Ambitious Catchphrase -->
+                    <div class="my-6 p-4 rounded-2xl bg-[#111622] border border-slate-800 inline-block text-left shadow-xl max-w-xl mx-auto lg:mx-0">
+                        <p class="text-sm sm:text-base text-slate-200 font-medium italic flex items-center gap-3">
+                            <span class="text-2xl">🥴</span>
+                            <span>"La seule limite, <span class="text-white font-bold underline decoration-slate-500">c'est votre budget</span>"</span>
+                        </p>
+                    </div>
+
+                    <p class="text-base sm:text-lg text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                        Rejoins la communauté des créateurs et makers du lycée ! De l'électronique de base aux drones autonome, concrétise tes idées high-tech à travers des projets captivants.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#inscription" class="px-8 py-4 rounded-xl bg-white text-black font-bold text-center shadow-lg hover:bg-slate-200 transition-all">
+                            <i class="fa-solid fa-rocket mr-2"></i> Rejoindre le club
+                        </a>
+                        <a href="#programme" class="px-8 py-4 rounded-xl bg-[#111622] border border-slate-700 text-white font-bold text-center hover:bg-slate-800 transition-all">
+                            <i class="fa-solid fa-list-check mr-2"></i> Explorer les 12 projets
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Visual: Stylized Tech & Emblem Representation -->
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="w-full max-w-sm sm:max-w-md bg-[#111622] border border-slate-800 rounded-3xl p-6 glow-subtle relative overflow-hidden group">
+                        <!-- Circuit Pattern Subtle Overlay -->
+                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+                        
+                        <div class="relative z-10 text-center flex flex-col items-center">
+                            <!-- Logo Tribute Visual -->
+                            <div class="w-32 h-32 rounded-2xl bg-slate-900 border border-slate-700 p-2 mb-6 shadow-2xl flex items-center justify-center relative group-hover:border-slate-500 transition-colors">
+                                <div class="w-full h-full bg-[#080B11] rounded-xl flex flex-col items-center justify-center p-3 text-center">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <i class="fa-solid fa-leaf text-slate-300 text-2xl"></i>
+                                        <i class="fa-solid fa-microchip text-white text-2xl"></i>
+                                    </div>
+                                    <span class="text-[9px] font-bold text-slate-400 tracking-wider uppercase mt-1">Ravinala Tech</span>
+                                </div>
+                            </div>
+
+                            <h3 class="font-heading font-extrabold text-lg text-white mb-2">Ingénierie & Innovation</h3>
+                            <p class="text-xs text-slate-400 mb-6 px-4">
+                                Association de l'esprit d'invention malagasy et de la robotique moderne (Arduino, ESP32, capteurs & impression 3D).
+                            </p>
+
+                            <div class="grid grid-cols-2 gap-3 w-full text-left">
+                                <div class="bg-[#080B11] p-3 rounded-xl border border-slate-800">
+                                    <div class="text-white font-bold text-xs"><i class="fa-solid fa-layer-group text-slate-400 mr-1"></i> Multi-niveaux</div>
+                                    <div class="text-[11px] text-slate-400">De 6ème à Terminale</div>
+                                </div>
+                                <div class="bg-[#080B11] p-3 rounded-xl border border-slate-800">
+                                    <div class="text-white font-bold text-xs"><i class="fa-solid fa-gears text-slate-400 mr-1"></i> Pratique 100%</div>
+                                    <div class="text-[11px] text-slate-400">Prototypage & Code</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= À PROPOS / LE CLUB ================= -->
+    <section id="apropos" class="py-20 bg-[#0C1019] border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 block">Culture & Valeurs</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">Pourquoi nous rejoindre ?</h2>
+                <div class="w-16 h-1 bg-white mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="card-dark p-8 rounded-2xl relative">
+                    <div class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-white text-xl mb-6">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3 class="font-heading text-lg font-bold text-white mb-3">Apprentissage Concret</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Manipule du matériel électronique réel dès la première séance. Pas de cours théoriques ennuyeux, uniquement du faire par soi-même.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card-dark p-8 rounded-2xl relative">
+                    <div class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-white text-xl mb-6">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 class="font-heading text-lg font-bold text-white mb-3">Logique & Résolution</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Développe la rigueur scientifique, l'esprit d'analyse algorithmique et la capacité à surmonter les problèmes techniques en équipe.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card-dark p-8 rounded-2xl relative">
+                    <div class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-white text-xl mb-6">
+                        <i class="fa-solid fa-house-laptop"></i>
+                    </div>
+                    <h3 class="font-heading text-lg font-bold text-white mb-3">Projets à la Maison</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Grâce à ton propre matériel, poursuis tes expériences chez toi et partage tes progrès avec l'équipe lors des rassemblements.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PUBLIC CIBLE & CONDITIONS ================= -->
+    <section id="public" class="py-20 bg-[#080B11] border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-6">
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 block">Accès & Filières</span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white mb-6">Ouvert à tous les passionnés</h2>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                        Que vous soyez au collège (de la 6ème à la 3ème) ou au lycée dans n'importe quelle série, le club robotique vous accueille pour développer vos compétences informatiques et scientifiques :
+                    </p>
+
+                    <div class="flex flex-wrap gap-2.5 mb-8">
+                        <span class="px-3 py-1.5 rounded-lg bg-white text-black text-xs font-bold">6ème à 3ème (Collège)</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold">2nd à Terminale (Toutes Séries)</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold">S</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold">L</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold">OSE</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold">EN / FM</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold">G2 / G3</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold">BTP</span>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6">
+                    <div class="bg-[#111622] p-8 rounded-3xl border border-slate-700 relative">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-600 text-white flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <h3 class="font-heading text-lg font-bold text-white">Condition pour le Collège (6ème - 3ème)</h3>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            Pour des raisons de suivi éducatif et d'organisation, les élèves inscrits entre la <strong>6ème et la 3ème</strong> doivent impérativement fournir :
+                        </p>
+                        <ul class="space-y-2 text-xs text-slate-400">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-white"></i> L'accord écrit et signé des parents ou tuteurs.</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-white"></i> Un numéro de téléphone direct d'un responsable légal.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TARIFS & MATÉRIEL ================= -->
+    <section id="tarifs" class="py-20 bg-[#0C1019] border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 block">Adhésion & Équipement</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">Tarification Accessibles & Équipements</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Cotisation Card -->
+                <div class="card-dark p-8 rounded-3xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700">Cotisation Mensuelle</span>
+                            <span class="text-xs text-slate-500 line-through">25 000 Ar</span>
+                        </div>
+                        <div class="font-heading text-4xl sm:text-5xl font-black text-white mb-3">
+                            5 000 <span class="text-slate-400 text-2xl font-bold">Ar / mois</span>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            La cotisation mensuelle est fixée à seulement <strong>5 000 Ar par mois</strong> pour rendre le club accessible à tous. Cet investissement permet de financer les équipements partagés et le matériel collectif réutilisable au profit de l'établissement.
+                        </p>
+                    </div>
+                    <a href="#inscription" class="w-full py-3.5 rounded-xl bg-white text-black font-bold text-center text-sm hover:bg-slate-200 transition-colors">
+                        Rejoindre le club
+                    </a>
+                </div>
+
+                <!-- Matériel Personnel Card -->
+                <div class="card-dark p-8 rounded-3xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-white flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+                            <h3 class="font-heading text-lg font-bold text-white">Matériel Individuel</h3>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Chaque membre est invité à acheter son propre matériel de base (microcontrôleur Arduino/ESP32, câbles, breadboard, capteurs). 
+                        </p>
+                        <div class="p-3.5 rounded-xl bg-[#080B11] border border-slate-800 text-xs text-slate-400">
+                            🎯 <strong>Objectif :</strong> Permettre à l'élève de travailler de manière autonome chez lui et de conserver ses créations finales.
+                        </div>
+                    </div>
+                    <div class="mt-6 text-xs text-slate-500 italic">
+                        Le club fournit des kits de dépannage et conseille sur les achats économiques.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PROGRAMME COMPLET (12 PROJETS) ================= -->
+    <section id="programme" class="py-20 bg-[#080B11] border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 block">Curriculum Pédagogique</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">Le Programme Commun (12 Projets)</h2>
+                <p class="text-slate-400 text-sm mt-3">Une progression méthodique de l’initiation aux systèmes complexes.</p>
+            </div>
+
+            <!-- Banner Projet Personnel & Coach Mahefa -->
+            <div class="mb-12 p-6 rounded-2xl bg-[#111622] border border-slate-700 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-white text-black flex items-center justify-center text-2xl font-black shrink-0">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-heading font-extrabold text-white text-base sm:text-lg">Créez votre propre Projet Personnel !</h3>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1">
+                            En plus du programme commun ci-dessous, chaque membre est vivement invité à inventer et réaliser son propre projet sur mesure. Vous serez assisté, guidé et accompagné pas à pas par le <strong>Coach Mahefa</strong> !
+                        </p>
+                    </div>
+                </div>
+                <a href="#inscription" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold whitespace-nowrap border border-slate-600 transition-colors">
+                    <i class="fa-solid fa-user-gear mr-1.5"></i> Proposer mon idée
+                </a>
+            </div>
+
+            <!-- 12 Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- 1. Traffic lights -->
+                <div class="card-dark p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-traffic-light"></i>
+                            </div>
+                            <span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-bold">Initiation</span>
+                        </div>
+                        <h4 class="font-heading text-base font-bold text-white mb-2">1. Traffic Lights (Feux Tricolores)</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed">Prise en main des variables, sorties numériques et temporisations avec des LEDs.</p>
+                    </div>
+                </div>
+
+                <!-- 2. Commande de lumière de maison a distance -->
+                <div class="card-dark p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-house-signal"></i>
+                            </div>
+                            <span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-bold">IoT / Domotique</span>
+                        </div>
+                        <h4 class="font-heading text-base font-bold text-white mb-2">2. Commande Domotique à Distance</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed">Contrôler l'éclairage et les appareils d'une maison via Wi-Fi/Bluetooth avec ESP32.</p>
+                    </div>
+                </div>
+
+                <!-- 3. Line Following -->
+                <div class="card-dark p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-route"></i>
+                            </div>
+                            <span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-bold">Robotique</span>
+                        </div>
+                        <h4 class="font-heading text-base font-bold text-white mb-2">3. Line Following (Suiveur de Ligne)</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed">Calibrage de capteurs infrarouges et gestion des trajectoires sur piste.</p>
+                    </div>
+                </div>
+
+                <!-- 4. Robot Autonome -->
+                <div class="card-dark p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-bold">Autonomie</span>
+                        </div>
+                        <h4 class="font-heading text-base font-bold text-white mb-2">4. Robot Autonome</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed">Détection et évitement d'obstacles par ultrasons avec prises de décision automatiques.</p>
+                    </div>
+                </div>
+
+                <!-- 5. Robot Tout Terrain -->
+                <div class="card-dark p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-truck-monster"></i>
+                            </div>
+                            <span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-bold">Mécanique</span>
+                        </div>
+                        <h4 class="font-heading text-base font-bold text-white mb-2">5. Robot Tout Terrain</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed">Châssis renforcé, motricité accrue et gestion de la puissance des moteurs CC.</p>
+                    </div>
+                </div>
+
+                <!-- 6. Sorting by color -->
+                <div class="card-dark p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-filter"></i>
+                            </div>
+                            <span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-bold">Capteurs Optiques</span>
+                        </div>
+                        <h4 class="font-heading text-base font-bold text-white mb-2">6. Sorting by Color (Tri de Couleur)</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed">Analyse chromatique et tri mécanique automatique d'objets avec servomoteurs.</p>
+                    </div>
+                </div>
+
+                <!-- 7. Bras robotique -->
+                <div class="card-dark p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-hand-fist"></i>
+                            </div>
+                            <span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-bold">Cinématique</span>
+                        </div>
+                        <h4 class="font-heading text-base font-bold text-white mb-2">7. Bras Robotique</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed">Contrôle multi-axes pour la manipulation de précision et la préhension d'objets.</p>
+                    </div>
+                </div>
+
+                <!-- 8. Machine CNC -->
+                <div class="card-dark p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-sliders"></i>
+                            </div>
+                            <span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-bold">Usinage / Axes X,Y,Z</span>
+                        </div>
+                        <h4 class="font-heading text-base font-bold text-white mb-2">8. Machine CNC / Graveuse</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed">Pilotage de moteurs pas à pas et écriture de tracé par contrôle de coordonnées.</p>
+                    </div>
+                </div>
+
+                <!-- 9. Drone -->
+                <div class="card-dark p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-helicopter"></i>
+                            </div>
+                            <span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-bold">Aéronautique</span>
+                        </div>
+                        <h4 class="font-heading text-base font-bold text-white mb-2">9. Drone Quadricoptère</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed">Stabilisation par gyroscope/accéléromètre et gestion des contrôleurs de vol.</p>
+                    </div>
+                </div>
+
+                <!-- 10. Plane -->
+                <div class="card-dark p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-plane"></i>
+                            </div>
+                            <span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-bold">Vol Radiocommandé</span>
+                        </div>
+                        <h4 class="font-heading text-base font-bold text-white mb-2">10. Plane (Avion Radiocommandé)</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed">Aérodynamisme, gouvernes et télémesure pour modèle réduit d'avion.</p>
+                    </div>
+                </div>
+
+                <!-- 11. Rocket -->
+                <div class="card-dark p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-rocket"></i>
+                            </div>
+                            <span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-bold">Aérospatial</span>
+                        </div>
+                        <h4 class="font-heading text-base font-bold text-white mb-2">11. Rocket (Fusée & Avionique)</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed">Altimétrie, enregistrement de vol et éjection automatique de parachute.</p>
+                    </div>
+                </div>
+
+                <!-- 12. Robot assistant (Humanoïde) -->
+                <div class="card-dark p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-white flex items-center justify-center">
+                                <i class="fa-solid fa-user-astronaut"></i>
+                            </div>
+                            <span class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 font-bold">Systèmes Avancés</span>
+                        </div>
+                        <h4 class="font-heading text-base font-bold text-white mb-2">12. Robot Assistant Humanoïde</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed">Projet ultime : interactions, mouvements articulés et reconnaissance d'instructions.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SECTION PARENTS ================= -->
+    <section id="parents" class="py-20 bg-[#0C1019] border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 block">Information & Sécurité</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">Espace Réassurance Parents</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-dark p-6 rounded-2xl">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-white mb-4">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-base mb-2">Encadrement Responsable</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">Les ateliers sont supervisés par des responsables passionnés qui garantissent la sécurité des élèves lors des manipulations informatiques et matérielles.</p>
+                </div>
+
+                <div class="card-dark p-6 rounded-2xl">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-white mb-4">
+                        <i class="fa-solid fa-[#080B11]"></i>
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-base mb-2">Atout Académique</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">La robotique renforce les compétences en mathématiques, en physique et en informatique, préparant idéalement aux études supérieures scientifiques et techniques.</p>
+                </div>
+
+                <div class="card-dark p-6 rounded-2xl">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-white mb-4">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-base mb-2">Sécurité Électrique</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">Tous les travaux s'effectuent sur des très basses tensions (5V à 12V continue). Aucun risque d'électrocution lors des manipulations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CONTACT & FORMULAIRE ================= -->
+    <section id="inscription" class="py-20 bg-[#080B11] border-t border-slate-800/80 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="contact" class="text-center mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2 block">Pré-inscription</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">Rejoignez le Club</h2>
+                <p class="text-slate-400 text-sm mt-2">Remplissez le formulaire ci-dessous. Les informations parentales sont requises pour les élèves du collège.</p>
+            </div>
+
+            <!-- Coordonnées Directes -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+                <a href="tel:0380205899" class="bg-[#111622] p-5 rounded-2xl border border-slate-800 hover:border-slate-600 transition-colors flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 text-white flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400">Téléphone</div>
+                        <div class="text-sm font-bold text-white">038 02 058 99</div>
+                    </div>
+                </a>
+
+                <a href="mailto:ranaivosoamahefatiana76@gmail.com" class="bg-[#111622] p-5 rounded-2xl border border-slate-800 hover:border-slate-600 transition-colors flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 text-white flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400">E-mail</div>
+                        <div class="text-xs font-bold text-white truncate max-w-[170px]">ranaivosoamahefatiana76@gmail.com</div>
+                    </div>
+                </a>
+
+                <a href="https://www.facebook.com/mahefatiana.ranaivosoa" target="_blank" class="bg-[#111622] p-5 rounded-2xl border border-slate-800 hover:border-slate-600 transition-colors flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-slate-800 text-white flex items-center justify-center font-bold">
+                        <i class="fa-brands fa-facebook"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400">Facebook</div>
+                        <div class="text-xs font-bold text-white">Mahefatiana Ranaivosoa</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Formulaire -->
+            <div class="bg-[#111622] p-8 sm:p-10 rounded-3xl border border-slate-800 shadow-2xl">
+                <form id="signupForm" action="https://formspree.io/f/ranaivosoamahefatiana76@gmail.com" method="POST" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Nom & Prénom de l'Élève *</label>
+                            <input type="text" name="Nom_et_Prenom" required placeholder="ex: Rakoto Marc" class="w-full px-4 py-3 rounded-xl bg-[#080B11] border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-slate-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Classe / Filière *</label>
+                            <select id="classeSelect" name="Classe_Filiere" required class="w-full px-4 py-3 rounded-xl bg-[#080B11] border border-slate-800 text-white focus:outline-none focus:border-slate-500 text-sm">
+                                <option value="6ème">6ème (Collège - Accord parental requis)</option>
+                                <option value="5ème">5ème (Collège - Accord parental requis)</option>
+                                <option value="4ème">4ème (Collège - Accord parental requis)</option>
+                                <option value="3ème">3ème (Collège - Accord parental requis)</option>
+                                <option value="2nde">Seconde</option>
+                                <option value="1ère">Première</option>
+                                <option value="Tle S">Terminale S</option>
+                                <option value="Tle L">Terminale L</option>
+                                <option value="OSE">OSE</option>
+                                <option value="EN/FM">EN / FM</option>
+                                <option value="G2G3">G2 / G3</option>
+                                <option value="BTP">BTP</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Champs Accord Parental (Visible dynamiquement ou requis pour Collège) -->
+                    <div id="parentSection" class="p-4 rounded-xl bg-[#080B11] border border-slate-800 space-y-4">
+                        <div class="text-xs font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-shield-cat text-slate-400"></i> Informations & Accord des Parents (Obligatoire pour 6ème à 3ème)
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[11px] font-semibold text-slate-400 mb-1">Numéro de téléphone du Parent / Tuteur *</label>
+                                <input type="tel" id="parentPhone" name="Telephone_Parent" placeholder="034 XX XX XXX" class="w-full px-3.5 py-2.5 rounded-lg bg-[#111622] border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-slate-500 text-xs">
+                            </div>
+                            <div class="flex items-center pt-5">
+                                <label class="flex items-center gap-2 cursor-pointer text-xs text-slate-300">
+                                    <input type="checkbox" id="parentConsent" name="Accord_Parental_Confirme" value="Oui" class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-white focus:ring-0">
+                                    <span>Accord parental confirmé</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Téléphone de l'Élève</label>
+                            <input type="tel" name="Telephone_Eleve" placeholder="038 XX XX XXX" class="w-full px-4 py-3 rounded-xl bg-[#080B11] border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-slate-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">E-mail de Contact</label>
+                            <input type="email" name="Email_Eleve" placeholder="eleve@exemple.com" class="w-full px-4 py-3 rounded-xl bg-[#080B11] border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-slate-500 text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Projet préféré parmi la liste</label>
+                        <select name="Projet_Prefere" class="w-full px-4 py-3 rounded-xl bg-[#080B11] border border-slate-800 text-white focus:outline-none focus:border-slate-500 text-sm">
+                            <option value="Traffic Lights">Traffic Lights (Initiation)</option>
+                            <option value="Commande domotique">Commande de lumière de maison a distance</option>
+                            <option value="Line Following">Line Following</option>
+                            <option value="Robot Autonome">Robot Autonome</option>
+                            <option value="Robot Tout Terrain">Robot Tout Terrain</option>
+                            <option value="Sorting by color">Sorting by color</option>
+                            <option value="Bras robotique">Bras robotique</option>
+                            <option value="Machine CNC">Machine CNC</option>
+                            <option value="Drone">Drone</option>
+                            <option value="Plane">Plane</option>
+                            <option value="Rocket">Rocket</option>
+                            <option value="Robot assistant">Robot assistant (Humanoïde)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full py-4 rounded-xl bg-white text-black font-extrabold text-center hover:bg-slate-200 transition-all text-sm uppercase tracking-wider flex items-center justify-center gap-2">
+                        <span>Envoyer mon inscription par E-mail</span> <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+
+                <div id="successMsg" class="hidden mt-6 p-4 rounded-xl bg-slate-800 border border-slate-700 text-white text-sm text-center">
+                    <i class="fa-solid fa-circle-check text-xl mb-2 block text-emerald-400"></i>
+                    Votre pré-inscription a bien été envoyée par e-mail au Coach Mahefa ! Nous vous recontacterons très vite.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-[#080B11] border-t border-slate-800/80 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-white font-black text-sm">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <span class="font-heading font-extrabold text-white text-base tracking-wider">Club Robotique de Sainte Famille</span>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Institution Sainte Famille Mahamasina • "La seule limite, c'est votre budget 🥴"</p>
+            <p class="text-[11px] text-slate-600">&copy; 2026 Club Robotique de Sainte Famille. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Form Submission Logic using Formspree AJAX API
+        const signupForm = document.getElementById('signupForm');
+        const successMsg = document.getElementById('successMsg');
+        const submitBtn = document.getElementById('submitBtn');
+
+        signupForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Envoi en cours...</span> <i class="fa-solid fa-spinner animate-spin"></i>';
+
+            const formData = new FormData(signupForm);
+
+            try {
+                const response = await fetch(signupForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    signupForm.reset();
+                    signupForm.classList.add('hidden');
+                    successMsg.classList.remove('hidden');
+                } else {
+                    alert("Une erreur s'est produite lors de l'envoi. Veuillez vérifier les informations et réessayer.");
+                }
+            } catch (error) {
+                alert("Erreur de connexion. Veuillez vérifier votre réseau.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>Envoyer mon inscription par E-mail</span> <i class="fa-solid fa-paper-plane"></i>';
+            }
+        });
+    </script>
+</body>
+</html>
